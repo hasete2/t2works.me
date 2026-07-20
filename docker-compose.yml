@@ -1,0 +1,15 @@
+name: t2works.me
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    tty: true
+    ports:
+      - 5173:5173
+    environment:
+      - PORT=5173
+    volumes:
+      - ./app:/opt/app

@@ -1,20 +1,28 @@
 import TagCloud from "./components/tagCloud"
 import AboutMe from "./components/aboutMe"
 
+import Link from 'next/link'
+import contents_list from './../contents/contents_list.json';
+
 export default async function Page({ params }: { params: { slug: string } }) {
 
     // const data: Content = await getData(params.slug)
+
+    let items = Array();
+    contents_list.sort((a, b) => b.posted_at.localeCompare(a.posted_at)).slice(0, 5);
+    for (const c of contents_list) {
+        console.log(c.title);
+        items.push(
+            <article>
+                <h1><Link href={`/e/${c.slug}`}>{c.title}</Link></h1>
+                <p>{c.summary}</p>
+            </article>
+        );
+    }
     return (
         <main>
             <div className="content">
-            <article>
-                <h1><a href="./contents.html">メインコンテンツ</a></h1>
-                <p>ここにメインコンテンツを記述します。ここにメインコンテンツを記述します。ここにメインコンテンツを記述します。ここにメインコンテンツを記述します。ここにメインコンテンツを記述します。ここにメインコンテンツを記述します。ここにメインコンテンツを記述します。ここにメインコンテンツを記述します。ここにメインコンテンツを記述します。ここにメインコンテンツを記述します。</p>
-            </article>
-                {/* <div className="meta-data">Posted: {data.posted_at} | Tags: {data.tags.join(', ')}</div>
-                <article>
-                    <li>{data.html}</li>
-                </article> */}
+                {items}
             </div>
             <nav>
                 <TagCloud></TagCloud>

@@ -4,6 +4,8 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 import { format } from 'date-fns';
+import striptags from "striptags";
+
 
 function get_files(): string[] {
     return fs.readdirSync('./contents/')
@@ -16,6 +18,7 @@ async function parsePost(filePath: string) {
     const { data, content } = matter(raw);
 
     const html = (await remark().use(remarkHtml).process(content)).toString();
+    const summary = striptags(html).slice(0, 120);
 
     return {
         title: data.Title as string,
@@ -23,6 +26,7 @@ async function parsePost(filePath: string) {
         slug: data.Slug as string,
         tags: (data.Tags as string[]) ?? [],
         html,
+        summary,
     };
 }
 
@@ -49,8 +53,9 @@ async function main() {
         // contents list
         contents_list.push({
             'title': res.title,
-            'sluf': res.slug,
-            'posted_at': res.posted_at
+            'slug': res.slug,
+            'posted_at': res.posted_at,
+            'summary': res.summary,
         })
 
         // tag list
@@ -58,14 +63,16 @@ async function main() {
             if (t in tag_list) {
                 tag_list[t].push({
                     'title': res.title,
-                    'sluf': res.slug,
-                    'posted_at': res.posted_at
+                    'slug': res.slug,
+                    'posted_at': res.posted_at,
+                    'summary': res.summary,
                 })
             } else {
                 tag_list[t] = [{
                     'title': res.title,
-                    'sluf': res.slug,
-                    'posted_at': res.posted_at
+                    'slug': res.slug,
+                    'posted_at': res.posted_at,
+                    'summary': res.summary,
                 }]
             }
 

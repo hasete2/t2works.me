@@ -144,3 +144,7 @@ vite.config.ts.timestamp-*
 
 # Mac
 .DS_Store
+
+# Contents Dir
+app/t2works.me/contents/*.md
+app/t2works.me/contents/*.json

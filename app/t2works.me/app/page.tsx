@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     for (const c of contents_list) {
         console.log(c.title);
         items.push(
-            <article>
+            <article key={c.slug}>
                 <h1><Link href={`/e/${c.slug}`}>{c.title}</Link></h1>
                 <p>{c.summary}</p>
             </article>

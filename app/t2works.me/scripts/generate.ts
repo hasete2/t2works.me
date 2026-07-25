@@ -78,6 +78,9 @@ async function main() {
 
         }
 
+        // contents
+        writeFile(`./contents/${res.slug}.json`, res);
+
     }
 
     writeFile('./contents/contents_list.json', contents_list);

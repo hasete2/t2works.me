@@ -146,5 +146,4 @@ vite.config.ts.timestamp-*
 .DS_Store
 
 # Contents Dir
-app/t2works.me/contents/*.md
 app/t2works.me/contents/*.json

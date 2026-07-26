@@ -10,7 +10,9 @@
 ## generate
 
 ```
+# npm run generate
 # npm run build
+# npx http-server out
 ```
 
 # tsx scripts/generate.ts 

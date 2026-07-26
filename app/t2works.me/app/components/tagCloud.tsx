@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import tag_list from './../../contents/tag_list.json';
-import { Tagesschrift } from 'next/font/google';
 
 interface Tags {
     tag: string;

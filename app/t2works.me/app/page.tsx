@@ -4,14 +4,20 @@ import AboutMe from "./components/aboutMe"
 import Link from 'next/link'
 import contents_list from './../contents/contents_list.json';
 
-export default async function Page({ params }: { params: { slug: string } }) {
+interface Content {
+    slug: string;
+    title: string;
+    html: string,
+    tags: string[];
+    posted_at: string;
+}
 
-    // const data: Content = await getData(params.slug)
+
+export default async function Page() {
 
     let items = Array();
     contents_list.sort((a, b) => b.posted_at.localeCompare(a.posted_at)).slice(0, 5);
     for (const c of contents_list) {
-        console.log(c.title);
         items.push(
             <article key={c.slug}>
                 <h1><Link href={`/e/${c.slug}`}>{c.title}</Link></h1>

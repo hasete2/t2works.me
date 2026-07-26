@@ -19,18 +19,18 @@ jobs:
         with:
           node-version: 26
           cache: npm
-          cache-dependency-path: t2works.me/package-lock.json
+          cache-dependency-path: app/t2works.me/package-lock.json
 
       - name: Install dependencies
-        working-directory: t2works.me
+        working-directory: app/t2works.me
         run: npm ci
 
       - name: Generate
-        working-directory: t2works.me
+        working-directory: app/t2works.me
         run: npm run generate
 
       - name: Build
-        working-directory: t2works.me
+        working-directory: app/t2works.me
         run: npm run build
 
       - name: Configure AWS credentials
@@ -40,7 +40,7 @@ jobs:
           aws-region: ap-northeast-1
 
       - name: Sync to S3
-        working-directory: t2works.me
+        working-directory: app/t2works.me
         run: |
           aws s3 sync ./out s3://${{ secrets.S3_BUCKET }} --delete
 

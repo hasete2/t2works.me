@@ -141,3 +141,10 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Mac
+.DS_Store
+
+# Contents Dir
+app/t2works.me/contents/*.md
+app/t2works.me/contents/*.json

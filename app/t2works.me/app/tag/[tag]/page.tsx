@@ -34,6 +34,7 @@ export async function generateStaticParams() {
 async function getData(tag: string) {
   const tags = tag_list as unknown as Tag;
   const contents: Contents[] = tags[tag];
+  contents.sort((a, b) => b.posted_at.localeCompare(a.posted_at))
   return contents;
 }
 
